@@ -1,0 +1,19 @@
+{
+	"name": "tinygo-wasm-node",
+	"image": "mcr.microsoft.com/devcontainers/go:1-1.21-bullseye",
+	"features": {
+		"ghcr.io/devcontainers/features/node:1": {}
+	},
+	"customizations": {
+		"vscode": {
+			"extensions": [
+				"dtsvet.vscode-wasm",
+				"golang.go"
+			]
+		}
+	},
+	"containerEnv": {
+		"TZ": "Asia/Tokyo"
+	},
+	"postCreateCommand": "/bin/sh .devcontainer/postCreateCommand.sh"
+}
