@@ -1,14 +1,12 @@
+import "./wasm_exec.js"
 import { readFile } from "fs/promises";
 
 const content = await readFile("./main.wasm");
+const go = new Go();
 await WebAssembly.compile(content)
     .then((module) => {
-        const lib = new WebAssembly.Instance(module, {
-            wasi_snapshot_preview1: {
-                fd_write: () => { },
-            },
-        }).exports;
-        console.log(lib.add_two_number(128, 128)); // 256
+        const { add } = new WebAssembly.Instance(module, go.importObject).exports;
+        console.log(add(5, 6)); // Outputs: 11
     })
     .catch((e) => {
         console.error(e);

@@ -1,12 +1,17 @@
+.PHONY: install
+## cp $(tinygo env TINYGOROOT)/targets/wasm_exec.js .
+install:
+	cp $$(tinygo env TINYGOROOT)/targets/wasm_exec.js .
+
 .PHONY: clean
-## rm -f main.wasm
+## git clean -Xdf
 clean:
-	rm -f main.wasm
+	git clean -Xdf
 
 .PHONY: build
-## tinygo build -o main.wasm -target=wasi main.go
+## tinygo build -o main.wasm -target=wasm main.go
 build:
-	tinygo build -o main.wasm -target=wasi main.go
+	tinygo build -o main.wasm -target=wasm main.go
 	
 .PHONY: run
 ## node main.js
